@@ -88,7 +88,8 @@ class Result extends Component {
       //   scores[index] += Math.abs(leanVal);
       // }
 
-      const val = (results[i].value - 4);
+      console.log(results[i]);
+      const val = results[i].value - 4;
       const meaning = questionData[i].meaning;
       scores[directEnum[meaning]] += val;
     }
