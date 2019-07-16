@@ -19,16 +19,22 @@ class Result extends Component {
   }
 
   getResults = () => {
-    return axios
-      .get(url + "/api/result/" + this.props.match.params.id)
-      .then(resp => {
-        this.setState({ results: resp.data }, this.getQuestionData);
+    axios
+    .get(url + "/api/result/" + this.props.match.params.id)
+    .then(resp => {
+      this.setState({ results: resp.data }, () => {
+        this.getQuestionData();
       });
+    });
   };
 
   getQuestionData = () => {
-    return axios.get(url + "/api/questions").then(resp => {
-      this.setState({ questionData: resp.data }, this.processData);
+    axios
+    .get(url + "/api/questions")
+    .then(resp => {
+      this.setState({ questionData: resp.data }, () => {
+        this.processData();
+      });
     });
   };
 
@@ -36,6 +42,7 @@ class Result extends Component {
     // runs through the data and calculates the test scores
     const questionData = this.state.questionData;
     const results = this.state.results;
+    console.log(results);
 
     // EI - Extraversion (E) or Introversion (I)
     // SN - Sensing (S) or Intuition (N)
