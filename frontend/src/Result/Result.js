@@ -3,6 +3,8 @@ import axios from "axios";
 import Dimension from "../Dimension/Dimension";
 import "./Result.css";
 
+const url = process.env.REACT_APP_API_URL + ":" +  process.env.REACT_APP_API_PORT;
+
 class Result extends Component {
   state = {
     results: [],
@@ -18,23 +20,22 @@ class Result extends Component {
 
   getResults = () => {
     return axios
-      .get("http://localhost:5000/api/result/" + this.props.match.params.id)
+      .get(url + "/api/result/" + this.props.match.params.id)
       .then(resp => {
         this.setState({ results: resp.data }, this.getQuestionData);
       });
   };
 
   getQuestionData = () => {
-    return axios.get("http://localhost:5000/api/questions").then(resp => {
+    return axios.get(url + "/api/questions").then(resp => {
       this.setState({ questionData: resp.data }, this.processData);
     });
   };
 
   processData = () => {
+    // runs through the data and calculates the test scores
     const questionData = this.state.questionData;
     const results = this.state.results;
-    console.log(questionData);
-    console.log(results);
 
     // EI - Extraversion (E) or Introversion (I)
     // SN - Sensing (S) or Intuition (N)
@@ -52,33 +53,35 @@ class Result extends Component {
     });
     const scores = Array(8).fill(0);
     for (let i = 0; i < questionData.length; i++) {
-      //shift values from 1 -> 7 to -3 -> 3 and skip neutral scores
-      const leanVal = results[i].value - 4;
-      if (leanVal === 0) continue;
+      // //this commented out solution doesn't match the test cases
+      // //it is based on an interpretation that each response represents
+      // //a point between two meanings, rather than a line towards one
 
-      const meaning = questionData[i].meaning;
-      //data is stored as binary 0 or 1 in db so make 0 negative
-      const direction = questionData[i].direction < 1 ? -1 : 1;
-
-      if (Math.sign(direction) === Math.sign(leanVal))
-        //both direction and score points to the same direction on scale
-        scores[directEnum[meaning]] += Math.abs(leanVal);
-      else {
-        //score is opposite of the direction so we have to find the index
-        //in our enum that is the opposite of our meaning
-        //Ex: if 'E' aka 0, add 1 so that it is 'I'.
-        //    if 'I' aka 1, sub 1 so that it is 'E'
-        let index = directEnum[meaning];
-        index += index % 2 === 0 ? 1 : -1;
-        scores[index] += Math.abs(leanVal);
-      }
-
-      // Not sure if this below is what the specs wanted?
-      // const val = results[i].value-1;
+      // //shift values from 1 -> 7 to -3 -> 3 and skip neutral scores
+      // const leanVal = results[i].value - 4;
+      // if (leanVal === 0) continue;
+      //
       // const meaning = questionData[i].meaning;
-      // scores[directEnum[meaning]] += val;
+      // //data is stored as binary 0 or 1 in db so make 0 negative
+      // const direction = questionData[i].direction < 1 ? -1 : 1;
+      //
+      // if (Math.sign(direction) === Math.sign(leanVal))
+      //   //both direction and score points to the same direction on scale
+      //   scores[directEnum[meaning]] += Math.abs(leanVal);
+      // else {
+      //   //score is opposite of the direction so we have to find the index
+      //   //in our enum that is the opposite of our meaning
+      //   //Ex: if 'E' aka 0, add 1 so that it is 'I'.
+      //   //    if 'I' aka 1, sub 1 so that it is 'E'
+      //   let index = directEnum[meaning];
+      //   index += index % 2 === 0 ? 1 : -1;
+      //   scores[index] += Math.abs(leanVal);
+      // }
+
+      const val = (results[i].value - 4);
+      const meaning = questionData[i].meaning;
+      scores[directEnum[meaning]] += val;
     }
-    console.log(scores);
     this.setState({ scores: scores });
   };
 
@@ -99,8 +102,6 @@ class Result extends Component {
     return (
       <div className="Result jumbotron">
         <div className="Result-message">
-          {/*{this.state.scores}*/}
-          {/*<br />*/}
           {message}
         </div>
         <div>

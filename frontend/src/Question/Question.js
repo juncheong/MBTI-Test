@@ -8,12 +8,7 @@ class Question extends Component {
   render() {
     return (
       <div className="Question">
-        {/*{this.props.questionData.num}*/}
         {this.props.questionData.text}
-        {/*{this.props.questionData.dimension}*/}
-        {/*{this.props.questionData.direction}*/}
-        {/*{this.props.questionData.meaning}*/}
-        <br />
         <form className="Question-form">
           <span className="Question-disagree">Disagree</span>
           <label

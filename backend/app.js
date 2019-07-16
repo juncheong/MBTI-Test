@@ -4,6 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+if (process.env.NODE_ENV !== 'development')
+  process.env.NODE_ENV = 'production';
+
 const apiRouter = require('./routes/api');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -46,6 +49,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// default value of process.env.PORT === 3000
 app.listen(process.env.PORT || 5000);
 
 module.exports = app;

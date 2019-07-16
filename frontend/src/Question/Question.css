@@ -1,11 +1,10 @@
 .Question {
+  margin: 2px 2px;
   padding: 5px;
-  background-color: white;
-  border-radius: 3px;
 }
 
-.Question-form {
-
+.Question-radio-button {
+  margin: 0px 7px;
 }
 
 .Question-disagree {

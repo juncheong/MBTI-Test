@@ -4,6 +4,8 @@ import axios from "axios";
 import Question from "../Question/Question";
 import "./Test.css";
 
+const url = process.env.REACT_APP_API_URL + ":" +  process.env.REACT_APP_API_PORT;
+
 class Test extends Component {
   state = {
     questions: [],
@@ -34,7 +36,7 @@ class Test extends Component {
     if (!this.validateResponses()) alert("Please answer every question");
     else {
       axios
-        .post("http://localhost:5000/api/response", {
+        .post(url + "/api/response", {
           email: this.state.email,
           questionResponses: this.state.responses
         })
@@ -55,7 +57,7 @@ class Test extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/questions")
+      .get(url + "/api/questions")
       .then(resp => {
         this.setState({ questions: resp.data });
       })
@@ -75,9 +77,7 @@ class Test extends Component {
       <div className="Test">
         <div className="Test-container">
           {questionsList}
-          <form onSubmit={this.handleSubmit}>
-            Email
-            <br />
+          <form className="Test-form" onSubmit={this.handleSubmit}>
             <input
               className="Test-email"
               type="email"
@@ -85,7 +85,6 @@ class Test extends Component {
               required
               onChange={this.handleEmail}
             />
-            <br />
             <button className="Test-submit btn btn-secondary" type="submit">
               Submit
             </button>

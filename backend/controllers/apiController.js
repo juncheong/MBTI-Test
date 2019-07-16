@@ -51,7 +51,7 @@ exports.postResponse = (req, res) => {
     .then(() => {
       setTimeout(() => {
         res.status(201).send({ responseId: responseId });
-      }, 60);
+      }, 80);
     })
     .catch(err => {
       console.log(err);
