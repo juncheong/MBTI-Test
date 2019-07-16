@@ -63,6 +63,7 @@ exports.getResult = (req, res) => {
   const responseId = req.params.responseId;
   Result.findById(responseId)
     .then(results => {
+      console.log(results[0]);
       res.send(results[0]);
     })
     .catch(err => {
