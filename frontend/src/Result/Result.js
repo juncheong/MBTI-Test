@@ -19,23 +19,26 @@ class Result extends Component {
   }
 
   getResults = () => {
-    axios
-    .get(url + "/api/result/" + this.props.match.params.id)
-    .then(resp => {
-      this.setState({ results: resp.data }, () => {
-        this.getQuestionData();
+    return axios
+      .get(url + "/api/result/" + this.props.match.params.id)
+      .then(resp => {
+        this.setState({ results: resp.data }, () => {
+          this.getQuestionData();
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
   };
 
   getQuestionData = () => {
-    axios
-    .get(url + "/api/questions")
-    .then(resp => {
-      this.setState({ questionData: resp.data }, () => {
-        this.processData();
+    return axios
+      .get(url + "/api/questions")
+      .then(resp => {
+        this.setState({ questionData: resp.data }, () => {
+          this.processData();
+        });
       });
-    });
   };
 
   processData = () => {
