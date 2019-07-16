@@ -1,0 +1,37 @@
+.Dimension {
+  min-height: 3em;
+  vertical-align: middle;
+  padding: 20px;
+  margin: 2px 100px;
+}
+
+.Dimension-span-box {
+  display: inline-block;
+  vertical-align: middle;
+  width: 105px;
+  height: 30px;
+  border: 1px solid lightslategray;
+}
+
+.Dimension-span-text {
+  font-family: "Helvetica Neue";
+  font-size: large;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100px;
+  height: 25px;
+  padding: 5px;
+  margin: 0px 20px;
+}
+
+.left {
+  margin: 5px 0px 5px 10px;
+}
+
+.right {
+  margin: 5px 10px 5px 0px;
+}
+
+.highlight {
+  background-color: rebeccapurple;
+}

@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  # db used for dev-env only
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: personality_test
+    ports:
+      - "3308:3306"
+    command: --default-authentication-plugin=mysql_native_password
+
+  backend:
+    build: ./backend
+    restart: always
+    volumes:
+      - ./backend:/app/backend
+      - /app/backend/node_modules
+    environment:
+      DB_NAME: personality_test
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: password
+      DB_PORT: 3306
+      NODE_ENV: development
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    ports:
+      - "3000:3000"

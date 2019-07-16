@@ -1,0 +1,17 @@
+.Question {
+  padding: 5px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.Question-form {
+
+}
+
+.Question-disagree {
+  margin: 0px 10px 0px 0px;
+}
+
+.Question-agree {
+  margin: 0px 0px 0px 10px;
+}
