@@ -25,11 +25,13 @@ exports.postResponse = (req, res) => {
   const response = new Response(null, email);
   let responseId;
 
+  console.log("postResponse: Printing req.body");
+  console.log(req.body);
+
   response
     .save()
     .then(dbResponse => {
       responseId = dbResponse[0].insertId;
-      let numInserted = 0;
       for (let i = 1; i < questionResponses.length; i++) {
         Question.getIdByNum(i)
           .then(questionIdResp => {
@@ -41,7 +43,7 @@ exports.postResponse = (req, res) => {
               questionId,
               questionResponses[i]
             );
-            questionResponse.save().then((numInserted += 1));
+            questionResponse.save();
           })
           .catch(err => {
             console.log(err);
@@ -51,7 +53,7 @@ exports.postResponse = (req, res) => {
     .then(() => {
       setTimeout(() => {
         res.status(201).send({ responseId: responseId });
-      }, 80);
+      }, 120);
     })
     .catch(err => {
       console.log(err);
