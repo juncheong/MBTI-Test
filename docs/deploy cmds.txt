@@ -1,0 +1,2 @@
+git subtree push --prefix backend https://git.heroku.com/mbti-backend.git master
+git subtree push --prefix frontend https://git.heroku.com/mbti-frontend.git master

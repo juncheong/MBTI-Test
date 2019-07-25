@@ -71,7 +71,7 @@ class Test extends Component {
 
     const questions = Array.from(this.state.questions);
     const questionsList = questions.map(q => (
-      <Question questionData={q} changeResponse={this.changeResponse} />
+      <Question key={q.num} questionData={q} changeResponse={this.changeResponse} />
     ));
     return (
       <div className="Test">
