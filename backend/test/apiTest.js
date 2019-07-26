@@ -33,8 +33,8 @@ describe('apiController', () => {
     });
   });
 
-  describe('POST /api/response', () => {
-    it('should POST all responses', (done) => {
+  describe('POST /api/response && GET /api/results', () => {
+    it('should POST all responses and GET the results', (done) => {
       const testData = {
         "email": "POST@test.com",
         "questionResponses": [0,1,2,3,4,5,6,7,1,2,3]
