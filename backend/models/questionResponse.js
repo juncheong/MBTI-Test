@@ -13,4 +13,7 @@ module.exports = class QuestionResponse {
       [this.responseId, this.questionId, this.value]
     );
   }
+  static deleteAll() {
+    return db.execute("DELETE FROM `question_response`");
+  }
 };

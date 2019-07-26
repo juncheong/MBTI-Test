@@ -10,6 +10,9 @@ module.exports = class Response {
       this.email
     ]);
   }
+  static deleteAll() {
+    return db.execute("DELETE FROM `response`");
+  }
   static findIdByEmail(email) {
     return db.execute("SELECT response_id FROM `response` WHERE `email` = ?", [
       email

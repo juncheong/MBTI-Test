@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -L app.js"
+    "start": "nodemon -L app.js",
+    "test": "mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,8 +13,13 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^1.6.5",
-    "nodemon": "^1.19.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1"
   }
 }

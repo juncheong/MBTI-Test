@@ -11,7 +11,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: personality_test
     ports:
-      - "3308:3306"
+      - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
 
   backend:
